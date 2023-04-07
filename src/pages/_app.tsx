@@ -1,14 +1,11 @@
 import 'styles/index.css';
 import 'reflect-metadata';
 
-import { AppPropsWithLayout } from 'containers/layout';
-import { RootContainer } from 'containers/root';
 import Head from 'next/head';
 import { Router } from 'next/router';
 import { NextSeo } from 'next-seo';
 import I18nProvider from 'next-translate/I18nProvider';
 import nProgress from 'nprogress';
-import { GlobalStoreProvider } from 'stores';
 import { SWRConfig } from 'swr';
 
 import i18nConfig from '../../i18n.json';
@@ -31,7 +28,7 @@ const i18nNameSpaceJP = {
 //   common: ENCommon,
 // };
 
-function App({ Component, pageProps }: AppPropsWithLayout) {
+function App({ Component, pageProps }: any) {
   const i18nNameSpace = useMemo(() => {
     // Get Current Language in order to load namespace
 
@@ -44,15 +41,11 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       </Head>
-      <GlobalStoreProvider>
-        <I18nProvider lang={'jp'} namespaces={i18nNameSpace} config={i18nConfig}>
-          <SWRConfig value={{ refreshInterval: 3000, fetcher: (resource, init) => fetch(resource, init).then((res) => res.json()) }}>
-            <RootContainer>
-              <Component {...pageProps} />
-            </RootContainer>
-          </SWRConfig>
-        </I18nProvider>
-      </GlobalStoreProvider>
+      <I18nProvider lang={'jp'} namespaces={i18nNameSpace} config={i18nConfig}>
+        <SWRConfig value={{ refreshInterval: 3000, fetcher: (resource, init) => fetch(resource, init).then((res) => res.json()) }}>
+          <Component {...pageProps} />
+        </SWRConfig>
+      </I18nProvider>
     </>
   );
 }

@@ -40,7 +40,7 @@
       "files": ["*.tsx", "*.ts"],
       "excludedFiles": ["**/pages/**/*.tsx", "**/reducers/**/*.ts"],
       "rules": {
-        "import/no-default-export": "error"
+        "import/no-default-export": "off"
       }
     },
     {
