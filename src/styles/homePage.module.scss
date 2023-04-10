@@ -1,0 +1,29 @@
+.homePage {
+  height: 100vh;
+  padding: 50px;
+  background-color: #dde5ed;
+
+  &__content {
+    overflow: auto;
+    padding: 20px;
+    border-radius: 24px;
+  }
+
+  &__title {
+    font-weight: 700;
+    font-family: cursive;
+  }
+
+  &__button {
+    background-color: aquamarine;
+    border-color: aquamarine;
+    border-radius: 5px;
+    width: 100px;
+    height: 36px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+  }
+}

@@ -32,3 +32,4 @@ yarn-error.log*
 .firebase
 .scannerwork
 .next
+.history

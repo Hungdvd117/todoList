@@ -3,7 +3,7 @@ const paletteOptions = require('./src/styles/theme/color');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/modules/**/*.{js,ts,jsx,tsx}', './src/components/**/*.{js,ts,jsx,tsx}'],
+  content: ['./src/pages/**/*.{js,ts,jsx,tsx}', './src/component/**/*.{js,ts,jsx,tsx}', './src/modules/**/*.{js,ts,jsx,tsx}', './src/components/**/*.{js,ts,jsx,tsx}'],
   plugins: [require('@tailwindcss/line-clamp')],
   theme: {
     extend: {
