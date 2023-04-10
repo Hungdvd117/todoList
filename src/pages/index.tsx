@@ -24,7 +24,43 @@ const listTodoDefault: TodoTable[] = [
   {
     title: 'New',
     status: 1,
-    content: [],
+    content: [
+      {
+        title: 'hung doan van',
+        description: 'hung hung hung hung hung hung hung hung hung hung hung hung hung',
+        status: 1,
+        detail: [' hung', ' hung'],
+        id: uniqueId(),
+      },
+      {
+        title: 'hung doan van',
+        description: 'hung hung hung hung hung hung hung hung hung hung hung hung hung',
+        status: 1,
+        detail: [' hung', ' hung'],
+        id: uniqueId(),
+      },
+      {
+        title: 'hung doan van',
+        description: 'hung hung hung hung hung hung hung hung hung hung hung hung hung',
+        status: 1,
+        detail: [' hung', ' hung'],
+        id: uniqueId(),
+      },
+      {
+        title: 'hung doan van',
+        description: 'hung hung hung hung hung hung hung hung hung hung hung hung hung',
+        status: 1,
+        detail: [' hung', ' hung'],
+        id: uniqueId(),
+      },
+      {
+        title: 'hung doan van',
+        description: 'hung hung hung hung hung hung hung hung hung hung hung hung hung',
+        status: 1,
+        detail: [' hung', ' hung'],
+        id: uniqueId(),
+      },
+    ],
   },
   {
     title: 'In-Progress',
@@ -59,6 +95,8 @@ export default function HomePage() {
 
   const [isEdit, setIsEdit] = useState(false);
 
+  const [isShow, setIsShow] = useState(false);
+
   const open = (item?: TableItem) => {
     if (item) {
       setDialogData({
@@ -69,9 +107,7 @@ export default function HomePage() {
       setIsEdit(true);
     }
 
-    const modal = document.getElementById('myModal')!;
-
-    modal.style.display = 'block';
+    setIsShow(true);
   };
 
   const handleSubmit = () => {
@@ -100,24 +136,25 @@ export default function HomePage() {
   };
 
   const close = () => {
-    const modal = document.getElementById('myModal')!;
     setDialogData({
       ...dialogDataDefault,
     });
     setIsEdit(false);
-    modal.style.display = 'none';
+    setIsShow(false);
   };
 
   return (
     <div className={styles.homePage}>
-      <div className="text-center">
-        <h1 className={styles.homePage__title}>TODO LIST</h1>
-        <button className={styles.homePage__button} onClick={() => open()}>
-          ADD
-        </button>
+      <div className={styles.homePage__content}>
+        <div className="flex justify-between">
+          <h1 className={styles.homePage__title}>Board</h1>
+          <button className={styles.homePage__button} onClick={() => open()}>
+            Add
+          </button>
+        </div>
+        <Todo listTodo={listTodo} setListTodo={setListTodo} open={open} />
+        {isShow ? <Dialog dialogData={dialogData} setDialogData={setDialogData} open={open} handleSubmit={handleSubmit} close={close} /> : null}
       </div>
-      <Todo listTodo={listTodo} setListTodo={setListTodo} open={open} />
-      <Dialog dialogData={dialogData} setDialogData={setDialogData} open={open} handleSubmit={handleSubmit} close={close} />
     </div>
   );
 }

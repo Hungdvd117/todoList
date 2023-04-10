@@ -3,7 +3,6 @@ import { Droppable, DroppableProvided } from 'react-beautiful-dnd';
 
 type ListProps = {
   children?: React.ReactNode;
-  onDragEnd: (data: any) => void;
   name: string;
 };
 
@@ -12,7 +11,7 @@ const List = ({ children, name }: ListProps) => {
     <div className="h-[100%]">
       <Droppable droppableId={name}>
         {(provided: DroppableProvided) => (
-          <div ref={provided.innerRef} className="h-[100%]">
+          <div ref={provided.innerRef} {...provided.droppableProps} className="h-[100%]">
             <div>{children}</div>
           </div>
         )}

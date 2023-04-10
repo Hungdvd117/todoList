@@ -2,6 +2,8 @@
 import React from 'react';
 
 import styles from '../styles/dialog.module.scss';
+import FormItem from './FormItem';
+import TheInput from './TheInput';
 
 type TableItem = {
   title: string;
@@ -62,11 +64,13 @@ export default function Dialog(props: IProps) {
   const renderContent = (contentData: string[]) => {
     return contentData.map((item, index) => {
       return (
-        <div key={index} className="flex justify-between">
-          <input type="text" value={item} className="w-[85%] mb-2" onChange={(e) => changeDetail(e, index)} />
-          <button className="w-[10%] h-[100%]" onClick={() => removeContent(index)}>
-            x
-          </button>
+        <div key={index} className="flex justify-between items-center">
+          <div className="w-[85%] mb-2">
+            <TheInput value={item} dialogData={props.dialogData} onChange={(e) => changeDetail(e, index)} />
+          </div>
+          <span className={`${styles.close} w-[10%] h-[100%]`} onClick={() => removeContent(index)}>
+            &times;
+          </span>
         </div>
       );
     });
@@ -89,59 +93,53 @@ export default function Dialog(props: IProps) {
           <span onClick={props.close} className={styles.close}>
             &times;
           </span>
-          <div className="flex justify-between mb-3">
-            <p className="w-[25%]">Title:</p>
-            <input
+          <FormItem title="Title">
+            <TheInput
               value={props.dialogData.title}
-              type="text"
-              className="w-[75%]"
-              onChange={(e) =>
+              dialogData={props.dialogData}
+              onChange={(e: any) =>
                 props.setDialogData({
                   ...props.dialogData,
                   title: e.target.value,
                 })
               }
             />
-          </div>
+          </FormItem>
 
-          <div className="flex justify-between mb-3">
-            <p className="w-[25%]">Description:</p>
-            <input
+          <FormItem title="Description">
+            <TheInput
               value={props.dialogData.description}
-              type="text"
-              className="w-[75%]"
-              onChange={(e) =>
+              dialogData={props.dialogData}
+              onChange={(e: any) =>
                 props.setDialogData({
                   ...props.dialogData,
                   description: e.target.value,
                 })
               }
             />
-          </div>
+          </FormItem>
 
-          <div className="flex justify-between mb-3">
-            <p className="w-[25%]">status:</p>
-            <div className="w-[75%]">
-              <select
-                value={props.dialogData.status}
-                onChange={(e) =>
-                  props.setDialogData({
-                    ...props.dialogData,
-                    status: Number(e.target.value),
-                  })
-                }
-              >
-                {renderStatusSelect()}
-              </select>
-            </div>
-          </div>
-          <div className="flex justify-between mb-3">
-            <div className="w-[25%]">
-              <p>Content:</p>
-            </div>
-            <div className="w-[75%]">
+          <FormItem title="Title">
+            <select
+              id="status"
+              className={styles.modal__select}
+              onChange={(e) =>
+                props.setDialogData({
+                  ...props.dialogData,
+                  status: Number(e.target.value),
+                })
+              }
+              value={props.dialogData.status}
+            >
+              {renderStatusSelect()}
+            </select>
+          </FormItem>
+
+          <FormItem title="Content">
+            <div>
               {renderContent(props.dialogData.detail)}
               <button
+                className={`${styles.modal__button} bg-sky-600 border-sky-600`}
                 onClick={() =>
                   props.setDialogData({
                     ...props.dialogData,
@@ -152,9 +150,11 @@ export default function Dialog(props: IProps) {
                 add content
               </button>
             </div>
-          </div>
+          </FormItem>
           <div className="text-center">
-            <button onClick={handleSubmitDialog}>Submit</button>
+            <button className={`${styles.modal__button} bg-sky-600 border-sky-600`} onClick={handleSubmitDialog}>
+              Submit
+            </button>
           </div>
         </div>
       </div>

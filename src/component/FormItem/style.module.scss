@@ -1,0 +1,10 @@
+.formItem {
+  @apply py-2 w-full;
+
+  &__title {
+    @apply mr-8;
+  }
+
+  &__input {
+  }
+}
